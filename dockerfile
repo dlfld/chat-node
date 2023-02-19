@@ -1,11 +1,13 @@
 FROM node
 
-WORKDIR /
+WORKDIR /app
 
 COPY . ./
 
 RUN npm config set registry https://registry.npmjs.org/
-RUN npm i 
+RUN npm install -g cnpm -registry=https://registry.npm.taobao.org
+RUN cnpm i
+# RUN npm i
 # --registry=https://registry.npmmirror.com/
 
-CMD ["npm", "start"]
+CMD ["cnpm", "start"]
