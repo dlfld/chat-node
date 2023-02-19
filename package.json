@@ -9,6 +9,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
+    "request": "^2.88.2",
+    "sha1": "^1.1.1",
+    "util": "^0.12.5",
+    "xml2js": "^0.4.23"
   }
 }
