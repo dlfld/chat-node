@@ -5,7 +5,8 @@ var path = require("path");
 var fs = require("fs");
 var util = require("util");
 var msg = require("./msg");
-var accessTokenJson = require("./config/access_token.json");
+var accessTokenJson = require("../config/access_token.json");
+var Chatgpt = require("./util/chatgpt");
 
 function Wechat(config) {
   this.config = config;
@@ -29,8 +30,15 @@ Wechat.prototype.autoMsg = function (req, res, next) {
       var fromUser = result.FromUserName;
       //回复普通消息
       if (result.MsgType === "text") {
-        // res.send(msg.textMsg(toUser, fromUser, msg.message(result.Content)));
         res.send(msg.textMsg(toUser, fromUser, "何豆豆是猪"));
+
+        Chatgpt.sendChatGPTMsg(result.context)
+          .then((r) => {
+            sendRes(res, JSON.stringify({ msg: r }));
+          })
+          .catch((err) => {
+            sendRes(res, JSON.stringify(err));
+          });
       }
     });
   });
