@@ -24,6 +24,9 @@ app.get("/auth", (req, res, next) => {
 app.post("/autoMsg", (req, res, next) => {
   wechat.autoMsg(req, res, next);
 });
+app.get("/aaa", (req, res, next) => {
+  console.log("i am in");
+});
 
 const port = process.env.PORT || 3000;
 app.listen(port, function () {
