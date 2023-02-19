@@ -17,35 +17,22 @@ function Wechat(config) {
 }
 
 Wechat.prototype.autoMsg = function (req, res, next) {
-    var buffer = [];
-    var that = this;
     req.on('data', function (data) {
         buffer.push(data);
-    });
-    req.on('end', function () {
-        var msgXml = Buffer.concat(buffer).toString('utf-8');
+        var msgXml = Buffer.concat([data]).toString('utf-8');
+        console.log('msgXml', msgXml);
         parseString(msgXml, { explicitArray: false }, function (err, result) {
-            console.log(err, result);
+            console.log('parseString', err, result);
             if (err) throw err;
-            // result = result.xml;
-            // var toUser = result.ToUserName;
-            // var fromUser = result.FromUserName;
+            result = result.xml;
+            var toUser = result.ToUserName;
+            var fromUser = result.FromUserName;
             //回复普通消息
             if (result.MsgType === "text") {
                 res.send(msg.textMsg(toUser, fromUser, msg.message(result.Content)));
-            } else if (result.MsgType === "image") {//回复图片
-                //在这里图片相当于素材，用户发送的素材只是临时素材，只能在微信服务器保存三天，回复思路：
-                //先上传素材---先封装一个post请求，然后通过素材接口获取media_id来获取素材
-                //上传素材就需要封装post get以及素材上传的api
-                //注意在上传素材时需要access_token所以也需要封装获取access_token的api
-                var urlPath = path.join(__dirname, "../material/timg.jpg");
-                that.uploadFile(urlPath, "image").then(function (mdeia_id) {
-                    resultXml = msg.imgMsg(fromUser, toUser, mdeia_id);
-                    res.send(resultXml);
-                })
             }
         })
-    })
+    });
 };
 
 //获取access_token
