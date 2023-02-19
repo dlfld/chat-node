@@ -25,11 +25,11 @@ Wechat.prototype.autoMsg = function (req, res, next) {
     req.on('end', function () {
         var msgXml = Buffer.concat(buffer).toString('utf-8');
         parseString(msgXml, { explicitArray: false }, function (err, result) {
+            console.log(err, result);
             if (err) throw err;
-            result = result.xml;
-            // console.log(result);
-            var toUser = result.ToUserName;
-            var fromUser = result.FromUserName;
+            // result = result.xml;
+            // var toUser = result.ToUserName;
+            // var fromUser = result.FromUserName;
             //回复普通消息
             if (result.MsgType === "text") {
                 res.send(msg.textMsg(toUser, fromUser, msg.message(result.Content)));
