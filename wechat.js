@@ -18,7 +18,7 @@ function Wechat(config) {
 
 Wechat.prototype.autoMsg = function (req, res, next) {
     req.on('data', function (data) {
-        buffer.push(data);
+        // buffer.push(data);
         var msgXml = Buffer.concat([data]).toString('utf-8');
         console.log('msgXml', msgXml);
         parseString(msgXml, { explicitArray: false }, function (err, result) {
