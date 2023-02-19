@@ -30,14 +30,13 @@ Wechat.prototype.autoMsg = function (req, res, next) {
       var fromUser = result.FromUserName;
       //回复普通消息
       if (result.MsgType === "text") {
-        res.send(msg.textMsg(toUser, fromUser, "何豆豆是猪"));
-
+        // res.send(msg.textMsg(toUser, fromUser, "何豆豆是猪"));
         Chatgpt.sendChatGPTMsg(result.context)
-          .then((r) => {
-            sendRes(res, JSON.stringify({ msg: r }));
+          .then((data) => {
+            res.send(msg.textMsg(toUser, fromUser, data));
           })
           .catch((err) => {
-            sendRes(res, JSON.stringify(err));
+            sendRes(res, err);
           });
       }
     });
