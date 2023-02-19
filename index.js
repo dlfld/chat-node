@@ -17,7 +17,7 @@ const config = {
         diyApi: '',
     }
 }
-var wechat = Wechat(config); //实例化一个WeChat对象
+var wechat = new Wechat(config); //实例化一个WeChat对象
 app.get('/auth', (req, res, next) => {
     wechat.auth(req, res, next);
 });
