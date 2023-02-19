@@ -53,7 +53,7 @@ Wechat.prototype.getAccessToken = function () {
                     accessTokenJson.expires_time = new Date().getTime() + (parseInt(result.expires_in) - 200) * 1000;
                     // console.log(accessTokenJson);
                     //更新本地存储的
-                    fs.writeFile('./../config/access_token.json', JSON.stringify(accessTokenJson), function (err) {
+                    fs.writeFile('./config/access_token.json', JSON.stringify(accessTokenJson), function (err) {
                         if (err) {
                             throw err;
                         } else {

@@ -25,7 +25,7 @@ app.post("/autoMsg", (req, res, next) => {
     wechat.autoMsg(req, res, next);
 });
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3001
 app.listen(port, function () {
     console.log(`服务已启动，端口：${port}`);
 })
