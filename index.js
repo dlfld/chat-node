@@ -18,10 +18,10 @@ const config = {
   },
 };
 var wechat = new Wechat(config); //实例化一个WeChat对象
-app.get("/abc", (req, res, next) => {
+app.get("/wx", (req, res, next) => {
   wechat.auth(req, res, next);
 });
-app.post("/abc", (req, res, next) => {
+app.post("/wx", (req, res, next) => {
   wechat.autoMsg(req, res, next);
 });
 app.get("/aaa", (req, res, next) => {
