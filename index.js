@@ -10,7 +10,7 @@ var Wechat = require("./wechat");
 console.log("Wechat", Wechat);
 const config = {
   wechat: {
-    token: "",
+    token: "abc",
     appID: "wxdcd01dfbd76ceb96",
     appSecret: "",
     prefix: "",
@@ -18,10 +18,10 @@ const config = {
   },
 };
 var wechat = new Wechat(config); //实例化一个WeChat对象
-app.get("/auth", (req, res, next) => {
+app.get("/abc", (req, res, next) => {
   wechat.auth(req, res, next);
 });
-app.post("/autoMsg", (req, res, next) => {
+app.post("/abc", (req, res, next) => {
   wechat.autoMsg(req, res, next);
 });
 app.get("/aaa", (req, res, next) => {
